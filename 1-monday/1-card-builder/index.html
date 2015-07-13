@@ -85,6 +85,10 @@
     .input-error {
       border: 1px solid red;
     }
+
+    .input-success {
+      border: 1px solid green;
+    }
   </style>
 </head>
 
@@ -146,9 +150,21 @@
       setCardBackground('yellow');
     });
 
+
     $('button.red').on('click', function(event) {
       event.preventDefault()
       setCardBackground('red');
+    });
+
+    $('input').on('input', function(event) {
+      event.preventDefault();
+      if (validate(event.target.name, event.target.value)) {
+        $(`[name=${event.target.name}]`).toggleClass('input-error', false);
+        $(`[name=${event.target.name}]`).toggleClass('input-success', true);
+      } else {
+        $(`[name=${event.target.name}]`).toggleClass('input-error', true);
+        $(`[name=${event.target.name}]`).toggleClass('input-success', false);
+      }
     });
 
     var setCardBackground = function(color) {
@@ -160,9 +176,18 @@
       $('.biz-card').toggleClass(color, true);
     };
 
-    var validateEmail = function(email) {
-      var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-      return re.test(email);
+
+
+    var validate = function(name, input) {
+      var validators = {
+        email: /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i,
+        phone: /^[0-9]*$/
+      };
+      if (validators[name]) {
+        return validators[name].test(input);
+      } else {
+        return true;
+      }
     };
   </script>
 </body>
