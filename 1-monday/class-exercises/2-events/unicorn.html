@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Unicorn style</title>
+</head>
+
+<style media="screen">
+
+</style>
+
+<body>
+
+  <button id="unicornizer">Unicorn style</button>
+
+  <p class="text">Hola</p>
+  <p class="text">Hola</p>
+  <p class="text">Hola</p>
+  <p class="text">Hola</p>
+  <p class="text">Hola</p>
+  <p class="text">Hola</p>
+  <p class="text">Hola</p>
+  <p class="text">Hola</p>
+  <p class="text">Hola</p>
+  <p class="text">Hola</p>
+
+  <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <script type="text/javascript">
+    $('#unicornizer').on('click', function(event) {
+      var colors = ['blue', 'red', 'yellow', 'black', 'white', 'green', 'orange'];
+      $('.text').each(function(index) {
+        var color = colors[Math.floor(Math.random() * colors.length)];
+        $(this).css('color', color);
+      });
+    });
+  </script>
+</body>
+
+</html>
