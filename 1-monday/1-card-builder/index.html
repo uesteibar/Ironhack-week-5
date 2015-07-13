@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jQuery exercise</title>
+  <style>
+    body {
+      font-family: Helvetica, sans-serif;
+    }
+    input {
+      height: 20px;
+      padding: 5px;
+      font-size: 16px;
+    }
+    button {
+      height: 32px;
+      font-size: 16px;
+    }
+    .colours {
+      margin: 20px 0;
+    }
+    .biz-card {
+      margin: 30px 5px;
+      height: 300px;
+      width: 500px;
+      border: 1px solid gray;
+      position: absolute;
+    }
+    .contact ul {
+      list-style: none;
+      position: absolute;
+      bottom: 5px;
+      width: 440px;
+      padding: 0 30px;
+    }
+    .contact li {
+      font-size: 14px;
+      display: inline;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      position: relative;
+    }
+    .right-align {
+      float: right;
+    }
+    .heading p {
+      text-align: center;
+    }
+    #name {
+      font-size: 34px;
+    }
+    #job-title {
+      font-size: 20px;
+    }
+    .blue {
+      background-color: #21325D;
+      color: #fff;
+    }
+
+    .blue  a {
+      color: white;
+    }
+
+    .yellow {
+      background-color: #F5FF8D;
+    }
+
+    .red {
+      background-color: #ff381e;
+      color: white;
+    }
+
+  </style>
+</head>
+<body>
+  <h1>Business Card Builder</h1>
+  <form>
+    <input type="text" name="name" placeholder="Name">
+    <input type="text" name="job-title" placeholder="Job title">
+    <input type="text" name="phone" placeholder="Phone">
+    <input type="text" name="email" placeholder="Email">
+    <button id="submit">Submit</button>
+    <div class="colours">
+      <button class="blue">Blue</button>
+      <button class="yellow">Yellow</button>
+      <button class="red">Red</button>
+    </div>
+  </form>
+
+  <div class="biz-card">
+    <div class="heading">
+      <p id="name">Sharon Kennedy</p>
+      <p id="job-title">Professional Trapeze Artist</p>
+    </div>
+    <div class="contact">
+      <ul>
+        <li id="phone">694 37 28 02</li>
+        <li id="email" class="right-align">sharon@ironhack.com</li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>
+
+      $('#submit').on('click', function(event) {
+        event.preventDefault()
+        var inputs = $('form').serializeArray();
+        inputs.forEach(function(input) {
+          if (input.name === 'email') {
+            $(`#${input.name}`).html('<a href="mailto:' + input.value + '">' + input.value + '</a>')
+          } else {
+            $(`#${input.name}`).text(input.value);
+          }
+        });
+      });
+
+      $('button.blue').on('click', function(event) {
+        event.preventDefault()
+        setCardBackground('blue');
+      });
+
+      $('button.yellow').on('click', function(event) {
+        event.preventDefault()
+        setCardBackground('yellow');
+      });
+
+      $('button.red').on('click', function(event) {
+        event.preventDefault()
+        setCardBackground('red');
+      });
+
+      var setCardBackground = function(color) {
+        var backgroundColors = ['blue', 'yellow', 'red'];
+        backgroundColors.forEach(function(color) {
+          $('.biz-card').toggleClass(color, false);
+        });
+
+        $('.biz-card').toggleClass(color, true);
+      }
+  </script>
+</body>
+</html>
