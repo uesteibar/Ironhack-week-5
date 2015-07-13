@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Phrases</title>
+</head>
+
+<style media="screen">
+  .highlighting {
+    color: red;
+  }
+</style>
+
+<body>
+
+  <div>
+    <h1 id="sentence-holder"></h1>
+  </div>
+
+  <form>
+    <input type="text" name="sentence">
+  </form>
+
+  <button type="submit" id="refresh">Refresh</button>
+
+  <button id="list-toggler">Hide</button>
+
+  <ul id="sentences">
+
+  </ul>
+
+  <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script type="text/javascript">
+    var sentences = [
+      'Hello world!!!',
+      'How you doing?',
+      'Another sentence'
+    ];
+
+    $(document).ready(function() {
+      refreshSentenceList();
+      refreshSentence();
+    });
+
+    $('#refresh').on('click', function(event) {
+      refreshSentence();
+    });
+
+    $('form').on('submit', function(event) {
+      event.preventDefault();
+      input = $('form').serializeArray()[0];
+      sentences.push(input.value);
+      refreshSentenceList();
+      $('form').trigger('reset');
+    });
+
+    $('#list-toggler').on('click', function(event) {
+      $('#sentences').fadeToggle('slow/400/fast', function() {
+        if ($('#sentences').is(':visible')) {
+          $('#list-toggler').text('Hide')
+        } else {
+          $('#list-toggler').text('Show')
+        }
+      });
+    });
+
+    $('#sentences').on('click', '.delete-phrase', function(event) {
+      event.preventDefault();
+      var index = $(this).parent()[0].dataset.index;
+      sentences.splice(index, 1);
+      refreshSentenceList();
+    });
+
+    var refreshSentence = function() {
+      var index = Math.floor(Math.random() * sentences.length);
+      $('#sentence-holder').text(sentences[index]);
+      highlightCurrent(index);
+    };
+
+    var highlightCurrent = function(index) {
+      $('li[data-index]').toggleClass('highlighting', false);
+      $(`[data-index=${index}]`).toggleClass('highlighting', true);
+    }
+
+    var refreshSentenceList = function() {
+      var list = '';
+      sentences.forEach(function(sentence, index) {
+        list += `<li data-index="${index}">${sentence}<button class="delete-phrase">X</button></li>`;
+      });
+      $('#sentences').html(list);
+    };
+  </script>
+</body>
+
+</html>

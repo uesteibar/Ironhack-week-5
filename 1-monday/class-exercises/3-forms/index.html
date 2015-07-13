@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Form validation</title>
+</head>
+
+<style media="screen">
+.input-error {
+    border: 1px solid red;
+  }
+
+  .input-success {
+    border: 1px solid green;
+  }
+</style>
+
+<body>
+  <form>
+    <input type="text" name="name" placeholder="name">
+    <input type="text" name="lastname" placeholder="lastname">
+    <input type="text" name="phone" placeholder="phone">
+    <input type="text" name="email" placeholder="email">
+    <button type="submit" name="submit">Submit</button>
+  </form>
+
+  <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script type="text/javascript">
+
+    $('form').on('submit', function(event) {
+      event.preventDefault();
+      var inputs = $('form').serializeArray();
+
+      inputs.forEach(function(input) {
+        if (validate(input.name, input.value)) {
+          $(`[name=${input.name}]`).toggleClass('input-success', true);
+          $(`[name=${input.name}]`).toggleClass('input-error', false);
+        } else {
+          $(`[name=${input.name}]`).toggleClass('input-error', true);
+          $(`[name=${input.name}]`).toggleClass('input-success', false);
+        }
+      });
+    });
+
+    var validate = function(name, input) {
+      var validators = {
+        email: /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i,
+        phone: /^-?\d+$/,
+        name: /^(?=\s*\S).*$/,
+        lastname: /^(?=\s*\S).*$/
+      };
+      if (validators[name]) {
+        return validators[name].test(input);
+      } else {
+        return true;
+      }
+    };
+  </script>
+</body>
+
+</html>
