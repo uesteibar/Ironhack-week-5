@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>jQuery exercise</title>
@@ -7,18 +8,22 @@
     body {
       font-family: Helvetica, sans-serif;
     }
+
     input {
       height: 20px;
       padding: 5px;
       font-size: 16px;
     }
+
     button {
       height: 32px;
       font-size: 16px;
     }
+
     .colours {
       margin: 20px 0;
     }
+
     .biz-card {
       margin: 30px 5px;
       height: 300px;
@@ -26,6 +31,7 @@
       border: 1px solid gray;
       position: absolute;
     }
+
     .contact ul {
       list-style: none;
       position: absolute;
@@ -33,6 +39,7 @@
       width: 440px;
       padding: 0 30px;
     }
+
     .contact li {
       font-size: 14px;
       display: inline;
@@ -40,24 +47,29 @@
       letter-spacing: 2px;
       position: relative;
     }
+
     .right-align {
       float: right;
     }
+
     .heading p {
       text-align: center;
     }
+
     #name {
       font-size: 34px;
     }
+
     #job-title {
       font-size: 20px;
     }
+
     .blue {
       background-color: #21325D;
       color: #fff;
     }
 
-    .blue  a {
+    .blue a {
       color: white;
     }
 
@@ -70,8 +82,12 @@
       color: white;
     }
 
+    .input-error {
+      border: 1px solid red;
+    }
   </style>
 </head>
+
 <body>
   <h1>Business Card Builder</h1>
   <form>
@@ -102,42 +118,53 @@
 
   <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
   <script>
-
-      $('#submit').on('click', function(event) {
-        event.preventDefault()
-        var inputs = $('form').serializeArray();
-        inputs.forEach(function(input) {
-          if (input.name === 'email') {
-            $(`#${input.name}`).html('<a href="mailto:' + input.value + '">' + input.value + '</a>')
+    $('#submit').on('click', function(event) {
+      event.preventDefault()
+      var inputs = $('form').serializeArray();
+      inputs.forEach(function(input) {
+        if ((input.name === 'email')) {
+          if (validateEmail(input.value)) {
+            $(`[name=${input.name}]`).toggleClass('input-error', false);
+            $(`#${input.name}`).html(`<a href="mailto:${input.value}">${input.value}</a>`);
           } else {
-            $(`#${input.name}`).text(input.value);
+            $(`[name=${input.name}]`).toggleClass('input-error', true);
+            $(`#${input.name}`).text('');
           }
-        });
+        } else {
+          $(`#${input.name}`).text(input.value);
+        }
+      });
+    });
+
+    $('button.blue').on('click', function(event) {
+      event.preventDefault()
+      setCardBackground('blue');
+    });
+
+    $('button.yellow').on('click', function(event) {
+      event.preventDefault()
+      setCardBackground('yellow');
+    });
+
+    $('button.red').on('click', function(event) {
+      event.preventDefault()
+      setCardBackground('red');
+    });
+
+    var setCardBackground = function(color) {
+      var backgroundColors = ['blue', 'yellow', 'red'];
+      backgroundColors.forEach(function(color) {
+        $('.biz-card').toggleClass(color, false);
       });
 
-      $('button.blue').on('click', function(event) {
-        event.preventDefault()
-        setCardBackground('blue');
-      });
+      $('.biz-card').toggleClass(color, true);
+    };
 
-      $('button.yellow').on('click', function(event) {
-        event.preventDefault()
-        setCardBackground('yellow');
-      });
-
-      $('button.red').on('click', function(event) {
-        event.preventDefault()
-        setCardBackground('red');
-      });
-
-      var setCardBackground = function(color) {
-        var backgroundColors = ['blue', 'yellow', 'red'];
-        backgroundColors.forEach(function(color) {
-          $('.biz-card').toggleClass(color, false);
-        });
-
-        $('.biz-card').toggleClass(color, true);
-      }
+    var validateEmail = function(email) {
+      var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+      return re.test(email);
+    };
   </script>
 </body>
+
 </html>
