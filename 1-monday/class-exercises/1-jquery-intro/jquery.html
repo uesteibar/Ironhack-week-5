@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <style media="screen">
+      .box {
+        margin-top: 20px;
+        border: 5px solid black;
+        height: 300px;
+        width: 300px;
+        transition: border-radius 1s;
+      }
+      .circle {
+        border-radius: 50%;
+        transition: border-radius 1s;
+      }
+      .decorated {
+        color: red;
+      }
+
+      li {
+        color: blue;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="container" style="margin-top: 50px;">
+      <button class="btn btn-primary hello-button">Do Something</button>
+      
+      <p>I like pizza.</p>
+      <input id="title-input" type="text" name="title" placeholder="type title...">
+      <button data-action="settitle">Set title</button>
+
+      <h1 id="title">jQuery Exercises</h1>
+      <button class="js-tacos">Tacos</button>
+      <button data-action="do stuff">Do Stuff</button>
+      <button data-action="dostuff">DoStuff</button>
+      <button data-action="countdown">Countdown</button>
+      <button data-action="toggle-circle">Toggle Circle</button>
+      <button data-action="liststuff">Do stuff with list</button>
+
+      <div class="text"></div>
+      <div id="countdown">
+      </div>
+
+      <div class="box circle">
+      </div>
+
+      <ul id="items">
+        <li>Item 1</li>
+        <li class="decorated">Item 2</li>
+        <li>Item 3</li>
+        <li class="decorated">Item 4</li>
+        <li>Item 5</li>
+        <li class="decorated">Item 6</li>
+      </ul>
+
+
+    </div>
+
+    <script type="text/javascript">
+      $('.hello-button').on('click', function () {
+        alert('hello world');
+      });
+
+      $('.js-tacos').on('click', function() {
+        alert('I love tacos!');
+      });
+
+      $('[data-action~=do]').on('click', function() {
+        var mainParagraph = $('p');
+        mainParagraph.append(' I am append!');
+        mainParagraph.prepend('I am prepend! ');
+        mainParagraph.before('<p>I am before!</p>');
+        mainParagraph.after('<p>I am after!</p>');
+      });
+
+      $('[data-action=countdown]').on('click', function() {
+        countdown($('#countdown'), 10);
+      });
+
+      $('[data-action=toggle-circle]').on('click', function() {
+        $('.box').toggleClass('circle')
+      });
+
+      $('[data-action=liststuff]').on('click', function() {
+        // appendToList('item 0', $('#items'));
+        styleOddItems('#items')
+      });
+
+      $('[data-action=settitle]').on('click', function() {
+        setTitle($('#title-input').val())
+      });
+
+      var setTitle = function(text) {
+        $('p').before('<h1>' + text + '</h1>')
+      };
+
+      var appendToList = function(item, domElement) {
+        domElement.prepend('<li>' + item + '</li>');
+      };
+
+      var styleOddItems = function(domElementID) {
+        $(domElementID + ' > li:odd').toggleClass('decorated')
+        $(domElementID + ' > li:even').toggleClass('decorated')
+      };
+
+      // $('[data-action*=do]').on('click', function() {
+      //   alert('They all do stuff!');
+      // });
+      //
+      // $('[data-action]').on('click', function() {
+      //   alert('We are 3 selected!');
+      // });
+
+      var countdown = function(element, num) {
+        setTimeout(function () {
+          element.html('<h1>' + num + '</h1>');
+
+          if (num === 0) {
+            element.html('<h1>BANG!!!</h1>');
+          } else {
+            countdown(element, num - 1);
+          }
+        }, 1000);
+      };
+
+
+
+    </script>
+  </body>
+</html>
