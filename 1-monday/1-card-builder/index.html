@@ -101,9 +101,9 @@
     <input type="text" name="email" placeholder="Email">
     <button id="submit">Submit</button>
     <div class="colours">
-      <button class="blue">Blue</button>
-      <button class="yellow">Yellow</button>
-      <button class="red">Red</button>
+      <button name="blue" class="color-changer blue">Blue</button>
+      <button name="yellow" class="color-changer yellow">Yellow</button>
+      <button name="red" class="color-changer red">Red</button>
     </div>
   </form>
 
@@ -123,7 +123,7 @@
   <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
   <script>
     $('#submit').on('click', function(event) {
-      event.preventDefault()
+      event.preventDefault();
       var inputs = $('form').serializeArray();
       inputs.forEach(function(input) {
         if ((input.name === 'email')) {
@@ -140,21 +140,11 @@
       });
     });
 
-    $('button.blue').on('click', function(event) {
-      event.preventDefault()
-      setCardBackground('blue');
+    $('button.color-changer').on('click', function(event) {
+      event.preventDefault();
+      setCardBackground(event.currentTarget.name);
     });
 
-    $('button.yellow').on('click', function(event) {
-      event.preventDefault()
-      setCardBackground('yellow');
-    });
-
-
-    $('button.red').on('click', function(event) {
-      event.preventDefault()
-      setCardBackground('red');
-    });
 
     $('input').on('input', function(event) {
       event.preventDefault();
