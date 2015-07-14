@@ -22,12 +22,18 @@ ArtistSearchController.prototype.init = function () {
 };
 
 var artistCard = function (artist) {
-  return '<div class="jumbotron col-md-6 col-md-offset-3">' +
+  var card = '<div class="jumbotron col-md-6 col-md-offset-3">' +
     '<div class="container">' +
       '<h2 class="text-center">' + artist.name + '</h2>' +
-      '<button type="button" class="center-block btn btn-primary">See more</button>' +
-    '</div>' +
+      '<p class="text-center">' + artist.followersCount + ' followers</p>' +
+      '<p class="text-center">' + artist.popularity + ' popularity points</p>';
+  if (artist.imageUrl) {
+    card += '<img src="' + artist.imageUrl + '" class="img-responsive" />';
+  }
+  card += '<button type="button" class="center-block btn btn-primary btn-lg">See more</button>' +
+  '</div>' +
   '</div>';
+  return card;
 };
 
 module.exports = ArtistSearchController;
