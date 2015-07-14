@@ -57,14 +57,14 @@
         </div>
         <div class="modal-body">
           {{#each songs}}
-            <li>{{title}}
+            <li>
               <button data-action="play" class="button">
                 <audio class="song" src="{{previewUrl}}">
                   Your browser does not support the <code>audio</code> element.
                   <source src="{{previewUrl}}">
                 </audio>
             &#9658;</button>​
-
+            {{title}}
             </li>
           {{/each}}
         </div>
