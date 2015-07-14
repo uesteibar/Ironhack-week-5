@@ -33,7 +33,6 @@ ArtistSearchController.prototype.init = function() {
       });
     });
 
-
     $('div#results').on('click', 'button[data-action="listen"]', function(event) {
       event.preventDefault();
 
@@ -41,9 +40,20 @@ ArtistSearchController.prototype.init = function() {
       albumRetriever.get(event.currentTarget.dataset.albumid, function(album) {
         var source = $("#album-modal-template").html();
         var template = Handlebars.compile(source);
+        console.log(album);
         html = template(album);
         $(html).modal();
       });
+    });
+
+    $('body').on('click', 'button[data-action="play"]', function(event) {
+      var audio = $($(event.currentTarget).find('audio'))[0];
+      $('audio').each(function() {
+        this.pause(); // Stop playing
+        this.currentTime = 0; // Reset time
+      });
+      audio.play();
+      console.log(audio);
     });
   });
 };

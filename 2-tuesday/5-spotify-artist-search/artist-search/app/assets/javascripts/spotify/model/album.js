@@ -1,4 +1,4 @@
-var Album = function(attributes) {
+var Album = function(attributes, songs) {
   this.title = attributes.title;
   this.id = attributes.id;
   this.url = attributes.url;
@@ -7,6 +7,8 @@ var Album = function(attributes) {
   } else {
     this.imageUrl = null;
   }
+
+  this.songs = songs || [];
 };
 
 module.exports = Album;
