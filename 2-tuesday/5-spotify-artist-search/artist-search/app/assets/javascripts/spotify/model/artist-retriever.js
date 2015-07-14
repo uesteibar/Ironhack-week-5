@@ -1,12 +1,11 @@
 var Artist = require('./artist');
 
-var ArtistSearcher = function() {};
+var ArtistRetriever = function() {};
 
-ArtistSearcher.prototype.search = function(term, callback) {
+ArtistRetriever.prototype.search = function(term, callback) {
   var request = $.get('https://api.spotify.com/v1/search?type=artist&query=' + term);
 
   request.done(function(artists) {
-    console.log(artists);
     var res_artists = artists.artists.items.map(function(artist) {
       return new Artist({
         name: artist.name,
@@ -21,4 +20,4 @@ ArtistSearcher.prototype.search = function(term, callback) {
   });
 };
 
-module.exports = ArtistSearcher;
+module.exports = ArtistRetriever;

@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap-sprockets
 
 var SpotifyController = require('./spotify/controller/spotify-controller');
 
