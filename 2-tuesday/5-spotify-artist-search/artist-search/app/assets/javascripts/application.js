@@ -12,5 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
-//= require_tree .
+
+var SpotifyController = require('./spotify/controller/spotify-controller');
+
+window.spotify = new SpotifyController();

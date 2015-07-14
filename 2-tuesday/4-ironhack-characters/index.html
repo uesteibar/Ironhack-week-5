@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Characters</title>
+
+  <style media="screen">
+    li {
+      list-style-type: none;
+    }
+    .card {
+      border: 1px solid black;
+      margin-top: 1rem;
+      padding: 1rem;
+      width: 40%;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Star Wars characters!</h1>
+
+
+
+  <form>
+    <div>
+      <label for="name">Name: </label>
+      <input type="text" name="name">
+    </div>
+    <div>
+      <label for="occupation">Occupation: </label>
+      <input type="text" name="occupation">
+    </div>
+    <div>
+      <label for="weapon">Weapon: </label>
+      <input type="text" name="weapon">
+    </div>
+
+    <div>
+      <button type="submit" name="button">Save</button>
+    </div>
+
+  </form>
+
+  <button id="retriever">Reload characters</button>
+
+  <ul id="characters">
+
+  </ul>
+
+
+  <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="app.js" charset="utf-8"></script>
+</body>
+
+</html>

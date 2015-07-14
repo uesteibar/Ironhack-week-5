@@ -1,0 +1,19 @@
+<div class="row">
+  <form class="col-md-6 col-md-offset-3" id="search">
+    <div class="form-group">
+      <label for="term">Artist</label>
+      <input class="form-control text-center" name="term" placeholder="type here..." type="text">
+    </div>
+    <button class="btn btn-default btn-block" type="submit">Search</button>
+  </form>
+</div>
+
+<div class="row" id="results">
+
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    window.spotify.searchController.init();
+  });
+</script>
