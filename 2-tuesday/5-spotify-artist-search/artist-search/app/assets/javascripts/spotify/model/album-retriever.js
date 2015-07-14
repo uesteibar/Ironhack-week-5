@@ -1,9 +1,8 @@
-
 var Album = require('./album');
 
 var AlbumRetriever = function() {};
 
-AlbumRetriever.prototype.getAlbums = function (artistID, callback) {
+AlbumRetriever.prototype.getAlbums = function(artistID, callback) {
   var request = $.get('https://api.spotify.com/v1/artists/' + artistID + '/albums');
 
   request.done(function(albums) {
@@ -16,6 +15,19 @@ AlbumRetriever.prototype.getAlbums = function (artistID, callback) {
       });
     });
     callback(res_albums);
+  });
+};
+
+AlbumRetriever.prototype.get = function(id, callback) {
+  var request = $.get('https://api.spotify.com/v1/albums/' + id);
+
+  request.done(function(album) {
+    callback(new Album({
+      title: album.name,
+      image: album.images[0],
+      url: album.href,
+      id: album.id
+    }));
   });
 };
 

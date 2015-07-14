@@ -40,7 +40,28 @@
     </div>
     <div class="media-body">
       <h4 class="media-heading">{{title}}</h4>
-      <button class="btn btn-primary btn-xs" data-action="listen" data-albumid="{{id}}">Listen</button>
+      <button class="btn btn-primary btn-xs" data-action="listen" data-albumid="{{id}}"
+      data-toggle="modal" data-target="#modal{{id}}">Listen</button>
     </div>
   </div>
+</script>
+
+<script id="album-modal-template" type="text/x-handlebars-template">
+  <div class="modal fade" id="album-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">{{title}}</h4>
+        </div>
+        <div class="modal-body">
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </script>

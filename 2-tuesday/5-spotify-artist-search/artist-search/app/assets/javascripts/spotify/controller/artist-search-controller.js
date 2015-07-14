@@ -1,4 +1,3 @@
-
 var Handlebars = require('handlebars');
 
 var ArtistSearchController = function() {};
@@ -38,14 +37,19 @@ ArtistSearchController.prototype.init = function() {
     $('div#results').on('click', 'button[data-action="listen"]', function(event) {
       event.preventDefault();
 
-      console.log(event.currentTarget.dataset.albumid);
-
+      var albumRetriever = new AlbumRetriever();
+      albumRetriever.get(event.currentTarget.dataset.albumid, function(album) {
+        var source = $("#album-modal-template").html();
+        var template = Handlebars.compile(source);
+        html = template(album);
+        $(html).modal();
+      });
     });
   });
 };
 
 var artistCard = function(artist) {
-  var source   = $("#artist-card").html();
+  var source = $("#artist-card").html();
   var template = Handlebars.compile(source);
   return template(artist);
 };
@@ -59,9 +63,11 @@ var albumList = function(albums) {
 }
 
 var albumCard = function(album) {
-  var source   = $("#album-media").html();
+  var source = $("#album-media").html();
   var template = Handlebars.compile(source);
   return template(album);
 };
+
+
 
 module.exports = ArtistSearchController;
