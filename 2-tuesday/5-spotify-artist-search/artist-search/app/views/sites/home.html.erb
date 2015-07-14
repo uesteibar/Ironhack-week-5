@@ -8,12 +8,39 @@
   </form>
 </div>
 
-<div class="row" id="results">
-
-</div>
+<div class="row" id="results"></div>
 
 <script type="text/javascript">
   $(document).ready(function () {
     window.spotify.searchController.init();
   });
+</script>
+
+<script id="artist-card" type="text/x-handlebars-template">
+  <div class="jumbotron col-md-6 col-md-offset-3">
+    <div class="container" data-artistid="{{id}}">
+      <h2 class="text-center">{{name}}</h2>
+      <p class="text-center">{{followersCount}}
+        followers</p>
+      <p class="text-center">{{popularity}}
+        popularity points</p>
+      <img class="img-responsive" src="{{imageUrl}}"/>
+      <button class="center-block btn btn-primary" data-action="albums" type="button">See Albums</button>
+      <div id="albumscontainer" style="display: none;"></div>
+    </div>
+  </div>
+</script>
+
+<script id="album-media" type="text/x-handlebars-template">
+  <div class="media">
+    <div class="media-left">
+      <a href="#">
+        <img class="media-object" height="50" src="{{imageUrl}}" width="50">
+      </a>
+    </div>
+    <div class="media-body">
+      <h4 class="media-heading">{{title}}</h4>
+      <button class="btn btn-primary btn-xs" data-action="listen" data-albumid="{{id}}">Listen</button>
+    </div>
+  </div>
 </script>

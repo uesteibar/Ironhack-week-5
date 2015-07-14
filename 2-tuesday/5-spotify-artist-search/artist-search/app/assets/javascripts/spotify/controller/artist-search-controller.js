@@ -1,3 +1,6 @@
+
+var Handlebars = require('handlebars');
+
 var ArtistSearchController = function() {};
 
 ArtistSearchController.prototype.init = function() {
@@ -42,19 +45,9 @@ ArtistSearchController.prototype.init = function() {
 };
 
 var artistCard = function(artist) {
-  var card = '<div class="jumbotron col-md-6 col-md-offset-3">' +
-    '<div class="container" data-artistid="' + artist.id + '">' +
-    '<h2 class="text-center">' + artist.name + '</h2>' +
-    '<p class="text-center">' + artist.followersCount + ' followers</p>' +
-    '<p class="text-center">' + artist.popularity + ' popularity points</p>';
-  if (artist.imageUrl) {
-    card += '<img src="' + artist.imageUrl + '" class="img-responsive" />';
-  }
-  card += '<button type="button" data-action="albums" class="center-block btn btn-primary">See Albums</button>' +
-    '<div id="albumscontainer" style="display: none;"></div>' +
-    '</div>' +
-    '</div>';
-  return card;
+  var source   = $("#artist-card").html();
+  var template = Handlebars.compile(source);
+  return template(artist);
 };
 
 var albumList = function(albums) {
@@ -66,17 +59,9 @@ var albumList = function(albums) {
 }
 
 var albumCard = function(album) {
-  return '<div class="media">' +
-    '<div class="media-left">' +
-      '<a href="#">' +
-        '<img class="media-object" height="50" width="50" src="' + album.imageUrl + '">' +
-      '</a>' +
-    '</div>' +
-    '<div class="media-body">' +
-      '<h4 class="media-heading">' + album.title + '</h4>' +
-      '<button class="btn btn-primary btn-xs" data-albumid="' + album.id + '" data-action="listen">Listen</button>' +
-    '</div>' +
-  '</div>'
+  var source   = $("#album-media").html();
+  var template = Handlebars.compile(source);
+  return template(album);
 };
 
 module.exports = ArtistSearchController;
