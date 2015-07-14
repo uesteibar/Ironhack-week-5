@@ -19,7 +19,7 @@ ArtistSearchController.prototype.init = function() {
       });
     });
 
-    $('div#results').on('click', 'button#albums', function(event) {
+    $('div#results').on('click', 'button[data-action="albums"]', function(event) {
       event.preventDefault();
       var container = $(event.target.parentElement);
       var albumsContainer = $(container.find('#albumscontainer')[0]);
@@ -29,6 +29,14 @@ ArtistSearchController.prototype.init = function() {
         albumsContainer.html(albumList(albums));
         albumsContainer.fadeToggle(true);
       });
+    });
+
+
+    $('div#results').on('click', 'button[data-action="listen"]', function(event) {
+      event.preventDefault();
+
+      console.log(event.currentTarget.dataset.albumid);
+
     });
   });
 };
@@ -42,7 +50,7 @@ var artistCard = function(artist) {
   if (artist.imageUrl) {
     card += '<img src="' + artist.imageUrl + '" class="img-responsive" />';
   }
-  card += '<button type="button" id="albums" class="center-block btn btn-primary">See Albums</button>' +
+  card += '<button type="button" data-action="albums" class="center-block btn btn-primary">See Albums</button>' +
     '<div id="albumscontainer" style="display: none;"></div>' +
     '</div>' +
     '</div>';
@@ -66,7 +74,7 @@ var albumCard = function(album) {
     '</div>' +
     '<div class="media-body">' +
       '<h4 class="media-heading">' + album.title + '</h4>' +
-      '<button class="btn btn-primary btn-xs" id="tracks">Listen</button>' +
+      '<button class="btn btn-primary btn-xs" data-albumid="' + album.id + '" data-action="listen">Listen</button>' +
     '</div>' +
   '</div>'
 };
