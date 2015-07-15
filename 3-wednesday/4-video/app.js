@@ -1,5 +1,5 @@
 (function() {
-  var video = document.querySelector('video');
+  var video = document.querySelector('video#bgvid');
   var goToFavourite = document.querySelector('button#gotofavourite');
   var restart = document.querySelector('button#restart');
   var loop = document.querySelector('button#loop');

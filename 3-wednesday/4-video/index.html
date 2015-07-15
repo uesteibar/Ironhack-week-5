@@ -4,17 +4,50 @@
 <head>
   <meta charset="utf-8">
   <title></title>
+
+  <style media="screen">
+    .card {
+      color: white;
+      padding: 2rem;
+      margin: 2rem;
+      border: 1px solid white;
+      background-color: black;
+      opacity: 0.5;
+      width: 20rem;
+    }
+
+    video#bgvid {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      z-index: -100;
+      -webkit-transform: translateX(-50%) translateY(-50%);
+      transform: translateX(-50%) translateY(-50%);
+      background-size: cover;
+    }
+  </style>
 </head>
 
 <body>
-  <video src="snail.mp4" width="80%" controls="true">
+  <video src="snail.mp4" id="bgvid" autoplay loop width="80%" controls="true">
     <p>This doesn't work on your browser!</p>
   </video>
-  <div>
-    <button type="button" id="gotofavourite">Go to favourite</button>
-    <button type="button" id="restart">Restart</button>
-    <button type="button" id="loop">Loop</button>
+
+  <div class="card">
+    <h1>SNAILS NEED LOVE!</h1>
+    <div>
+      <button type="button" id="gotofavourite">Go to favourite</button>
+      <button type="button" id="restart">Restart</button>
+      <button type="button" id="loop">Loop</button>
+    </div>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi debitis suscipit, maiores voluptatem officia? Recusandae quisquam at dolorum veritatis ullam labore esse quaerat eligendi suscipit nesciunt, libero facere, hic porro.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi debitis suscipit, maiores voluptatem officia? Recusandae quisquam at dolorum veritatis ullam labore esse quaerat eligendi suscipit nesciunt, libero facere, hic porro.</p>
   </div>
+
 
   <script src="app.js" charset="utf-8"></script>
 </body>
