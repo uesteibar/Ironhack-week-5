@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Geolocation</title>
+  </head>
+  <body>
+
+
+  <script type="text/javascript">
+    if ('geolocation' in navigator) {
+      console.log('geolocation is available!');
+      navigator.geolocation.getCurrentPosition(function(location) {
+        console.log(location);
+      });
+    } else {
+      console.log('geolocation is NOT available!');
+    }
+  </script>
+  </body>
+</html>
