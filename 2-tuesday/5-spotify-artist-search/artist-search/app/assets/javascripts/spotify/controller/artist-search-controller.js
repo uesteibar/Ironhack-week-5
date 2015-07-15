@@ -45,16 +45,6 @@ ArtistSearchController.prototype.init = function() {
         $(html).modal();
       });
     });
-
-    $('body').on('click', 'button[data-action="play"]', function(event) {
-      var audio = $($(event.currentTarget).find('audio'))[0];
-      $('audio').each(function() {
-        this.pause(); // Stop playing
-        this.currentTime = 0; // Reset time
-      });
-      audio.play();
-      console.log(audio);
-    });
   });
 };
 

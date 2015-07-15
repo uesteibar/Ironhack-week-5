@@ -58,8 +58,7 @@
         <div class="modal-body">
           {{#each songs}}
             <li>
-              <button data-action="play" class="button">
-                <audio class="song" src="{{previewUrl}}">
+                <audio class="song" src="{{previewUrl}}" controls="true">
                   Your browser does not support the <code>audio</code> element.
                   <source src="{{previewUrl}}">
                 </audio>
