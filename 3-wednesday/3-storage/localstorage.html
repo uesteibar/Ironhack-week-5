@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+
+    <script type="text/javascript">
+
+      // persists between sessions
+
+      localStorage.setItem('user', JSON.stringify({
+        name: 'uesteibar',
+        age: 23
+      }));
+
+      user = JSON.parse(localStorage.getItem('user'));
+
+      console.log(user);
+
+    </script>
+  </body>
+</html>
