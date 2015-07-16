@@ -17,6 +17,6 @@
 
   var router = require('./app-router');
 
-  router.go('pokedex/');
+  router.go();
 
 })();
