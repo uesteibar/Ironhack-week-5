@@ -8,23 +8,35 @@ var PokedexItemComponent = require('./components/pokedex-list-item');
 var Router = function(routes, defaultRoute) {
   this.routes = routes;
   this.defaultRoute = defaultRoute;
+  this.listenToBack();
 };
 
-var setUrl = function(route) {
-  window.history.pushState({
-    'html': document.documentElement.innerHTML
-  }, 'Pokedex', 'http://' + window.location.host + '/' + route);
+Router.prototype.setUrl = function(route) {
+  if (route !== this.currentPath()) {
+    window.history.pushState({
+      path: this.currentPath()
+    }, 'Pokedex', 'http://' + window.location.host + '/' + route);
+  }
+};
+
+Router.prototype.listenToBack = function() {
+  window.onpopstate = function(event) {
+    this.go(event.state.path);
+  }.bind(this);
+};
+
+Router.prototype.currentPath = function() {
+  return window.location.pathname.slice(1);
 };
 
 Router.prototype.go = function(route) {
   if (route) {
-    setUrl(route);
+    this.setUrl(route);
   }
-  console.log(window.location.pathname.slice(1));
-  route = window.location.pathname.slice(1);
+  route = this.currentPath();
   if (!route) {
     route = this.defaultRoute;
-    setUrl(route);
+    this.setUrl(route);
   }
   var regexRoute = /[\w-]+\//;
   var routeName = route.match(regexRoute)[0];
