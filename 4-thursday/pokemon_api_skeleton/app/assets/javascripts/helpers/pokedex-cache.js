@@ -1,12 +1,11 @@
 var PokedexCache = function() {};
 
 PokedexCache.prototype.getAll = function () {
-  console.log(sessionStorage.getItem('pokemons'));
-  return JSON.parse(sessionStorage.getItem('pokemons'));
+  return JSON.parse(sessionStorage.getItem('pokedex'));
 };
 
 PokedexCache.prototype.save = function (pokemons) {
-  sessionStorage.setItem('pokemons', JSON.stringify(pokemons))
+  sessionStorage.setItem('pokedex', JSON.stringify(pokemons))
 };
 
 module.exports = PokedexCache;

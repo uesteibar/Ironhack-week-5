@@ -2,6 +2,7 @@ var PokemonModel = require('./models/pokemon');
 var PokedexModel = require('./models/pokedex');
 
 var PokedexCache = require('./helpers/pokedex-cache');
+var PokemonCache = require('./helpers/pokemon-cache');
 
 var PokemonComponent = require('./components/pokemon');
 var PokedexComponent = require('./components/pokedex');
@@ -51,7 +52,7 @@ Router.prototype.go = function(route) {
 };
 
 Router.prototype.renderPokemonComponent = function(id) {
-  var pokemon = new PokemonModel(id);
+  var pokemon = new PokemonModel(id, new PokemonCache());
   var pokemonComponent = new PokemonComponent($('.pokedex-container'), pokemon);
 
   pokemon.fetch(function() {
