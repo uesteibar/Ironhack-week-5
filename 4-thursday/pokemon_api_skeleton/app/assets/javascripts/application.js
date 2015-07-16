@@ -14,17 +14,11 @@
 //= require jquery_ujs
 
 (function() {
-  // var PokemonModel = require('./models/pokemon');
-  // var PokemonComponent = require('./components/pokemon');
-
-  // var pokemonModel = new PokemonModel(1);
-  // pokemonModel.fetch(function(pokemon) {
-  //   var pokemonComponent = new PokemonComponent($('.pokedex-container'), pokemon);
-  //   pokemonComponent.render();
-  // });
 
   var PokedexModel = require('./models/pokedex');
+  var PokemonModel = require('./models/pokemon');
   var PokedexComponent = require('./components/pokedex');
+  var PokemonComponent = require('./components/pokemon');
   var PokedexItemComponent = require('./components/pokedex-list-item');
 
   var pokedex = new PokedexModel();
@@ -35,6 +29,17 @@
       new PokedexItemComponent()
     );
     pokedexComponent.render();
+  });
+
+  $('.pokedex-list').on('click', '[data-action="pokemon-details"]', function(event) {
+    event.preventDefault();
+
+    var pokemon = new PokemonModel(event.currentTarget.dataset.id);
+    pokemon.fetch(function() {
+      var pokemonComponent = new PokemonComponent($('.pokedex-container'), pokemon);
+      pokemonComponent.render();
+    });
+
   });
 
 })();
