@@ -5,8 +5,18 @@ var PokemonComponent = require('./components/pokemon');
 var PokedexComponent = require('./components/pokedex');
 var PokedexItemComponent = require('./components/pokedex-list-item');
 
-var Router = function(container) {
-  this.container = container;
+var Router = function(routes) {
+  this.routes = routes;
+};
+
+Router.prototype.go = function(route) {
+  var regexRoute = /[\w-]+\//;
+  var routeName = route.match(regexRoute)[0];
+  var regexId = /\/(\d+)/;
+  var id = route.match(regexId) == null ? null : parseInt(route.match(regexId)[1]);
+  routeName = id ? routeName + ":id" : routeName;
+  var methodToCall = this.routes[routeName];
+  this[methodToCall](id);
 };
 
 Router.prototype.renderPokemonComponent = function(id) {
@@ -26,8 +36,11 @@ Router.prototype.renderPokedexComponent = function() {
       result.pokemon,
       new PokedexItemComponent()
     );
-    pokedexComponent.render();
-  });
+    pokedexComponent.render(this);
+  }.bind(this));
 };
 
-module.exports = Router;
+module.exports = new Router({
+  'pokedex/': 'renderPokedexComponent',
+  'pokedex/:id': 'renderPokemonComponent'
+});

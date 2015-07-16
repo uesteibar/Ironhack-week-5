@@ -15,9 +15,8 @@
 
 (function() {
 
-  var Router = require('./app-router');
-  var router = new Router();
+  var router = require('./app-router');
 
-  router.renderPokedexComponent();
+  router.go('pokedex/');
 
 })();
