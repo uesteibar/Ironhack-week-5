@@ -13,3 +13,20 @@
  *= require_tree .
  *= require_self
  */
+
+ .pokedex-container, .pokedex-list {
+   float: left;
+   padding: 1rem;
+   margin: 2rem;
+   border: 1px solid black;
+ }
+
+ .pokedex-list-item {
+   list-style: none;
+ }
+
+ .pokedex-circle-item {
+   border-radius: 50%;
+   border: 1px solid black;
+   padding: 1rem;
+ }

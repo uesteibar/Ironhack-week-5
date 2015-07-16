@@ -14,12 +14,27 @@
 //= require jquery_ujs
 
 (function() {
-  var PokemonModel = require('./models/pokemon');
-  var PokemonComponent = require('./components/pokemon');
+  // var PokemonModel = require('./models/pokemon');
+  // var PokemonComponent = require('./components/pokemon');
 
-  var pokemonModel = new PokemonModel(1);
-  pokemonModel.fetch(function(pokemon) {
-    var pokemonComponent = new PokemonComponent($('.pokedex-container'), pokemon);
-    pokemonComponent.render();
+  // var pokemonModel = new PokemonModel(1);
+  // pokemonModel.fetch(function(pokemon) {
+  //   var pokemonComponent = new PokemonComponent($('.pokedex-container'), pokemon);
+  //   pokemonComponent.render();
+  // });
+
+  var PokedexModel = require('./models/pokedex');
+  var PokedexComponent = require('./components/pokedex');
+  var PokedexItemComponent = require('./components/pokedex-list-item');
+
+  var pokedex = new PokedexModel();
+  pokedex.getAll(function(result) {
+    pokedexComponent = new PokedexComponent(
+      $('.pokedex-list'),
+      result.pokemon,
+      new PokedexItemComponent()
+    );
+    pokedexComponent.render();
   });
+
 })();
