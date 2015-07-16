@@ -15,31 +15,9 @@
 
 (function() {
 
-  var PokedexModel = require('./models/pokedex');
-  var PokemonModel = require('./models/pokemon');
-  var PokedexComponent = require('./components/pokedex');
-  var PokemonComponent = require('./components/pokemon');
-  var PokedexItemComponent = require('./components/pokedex-list-item');
+  var Router = require('./app-router');
+  var router = new Router();
 
-  var pokedex = new PokedexModel();
-  pokedex.getAll(function(result) {
-    pokedexComponent = new PokedexComponent(
-      $('.pokedex-list'),
-      result.pokemon,
-      new PokedexItemComponent()
-    );
-    pokedexComponent.render();
-  });
-
-  $('.pokedex-list').on('click', '[data-action="pokemon-details"]', function(event) {
-    event.preventDefault();
-
-    var pokemon = new PokemonModel(event.currentTarget.dataset.id);
-    pokemon.fetch(function() {
-      var pokemonComponent = new PokemonComponent($('.pokedex-container'), pokemon);
-      pokemonComponent.render();
-    });
-
-  });
+  router.renderPokedexComponent();
 
 })();
