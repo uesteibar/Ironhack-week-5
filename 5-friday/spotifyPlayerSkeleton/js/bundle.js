@@ -10,6 +10,7 @@
     var searchForm = $('form#search');
     var widgetElement = $('div#widget');
     var widget = new WidgetComponent('div#widget', {loop: true, autoplay: true});
+    widget.render();
     var currentSongs = [];
 
     searchForm.on('submit', function(event) {
@@ -80,6 +81,12 @@ var WidgetComponent = function(selector, options) {
   this.options = options;
 };
 
+WidgetComponent.prototype.render = function() {
+  $.get('js/spotify/components/widget.html', function(widgetHtml) {
+    $(this.selector).html(widgetHtml);
+  }.bind(this));
+};
+
 WidgetComponent.prototype.update = function(song) {
   this.pause();
   $(this.selector + ' #title').text(song.title);
@@ -115,7 +122,7 @@ WidgetComponent.prototype.declareEvents = function() {
   }.bind(this));
 };
 
-WidgetComponent.prototype.setLoop = function (loop) {
+WidgetComponent.prototype.setLoop = function(loop) {
   this.loop = loop;
 };
 

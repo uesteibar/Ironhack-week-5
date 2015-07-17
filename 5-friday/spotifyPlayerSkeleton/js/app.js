@@ -9,6 +9,7 @@
     var searchForm = $('form#search');
     var widgetElement = $('div#widget');
     var widget = new WidgetComponent('div#widget', {loop: true, autoplay: true});
+    widget.render();
     var currentSongs = [];
 
     searchForm.on('submit', function(event) {
