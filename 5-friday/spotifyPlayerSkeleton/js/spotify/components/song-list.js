@@ -9,7 +9,7 @@ SongListComponent.prototype.template = function(songs) {
   songs.forEach(function(song, index) {
     html += this.itemComponent.template(song, index);
   }.bind(this));
-  return '<ul>' + html +'</ul>';
+  return html;
 };
 
 SongListComponent.prototype.render = function () {

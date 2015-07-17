@@ -22,7 +22,7 @@
       });
     });
 
-    resultsContainer.on('click', 'a[data-index]', function(event) {
+    resultsContainer.on('click', '[data-index]', function(event) {
       event.preventDefault();
       var index = event.currentTarget.dataset.index;
       widget.update(currentSongs[index]);
@@ -43,7 +43,10 @@
 var SongListItemComponent = function() {};
 
 SongListItemComponent.prototype.template = function(song, index) {
-  var html = '<li><a href="" data-index="' + index + '">' + song.title + '</a></li>';
+  var html = '<div class="song-list-item" data-index="' + index + '">' +
+  '<p>' + song.authors.join(' & ') + '</p>' +
+  '<p>' + song.title + '</p>' +
+  '</div>';
   return html;
 };
 
@@ -61,7 +64,7 @@ SongListComponent.prototype.template = function(songs) {
   songs.forEach(function(song, index) {
     html += this.itemComponent.template(song, index);
   }.bind(this));
-  return '<ul>' + html +'</ul>';
+  return html;
 };
 
 SongListComponent.prototype.render = function () {

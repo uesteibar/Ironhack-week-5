@@ -1,7 +1,10 @@
 var SongListItemComponent = function() {};
 
 SongListItemComponent.prototype.template = function(song, index) {
-  var html = '<li><a href="" data-index="' + index + '">' + song.title + '</a></li>';
+  var html = '<div class="song-list-item" data-index="' + index + '">' +
+  '<p>' + song.authors.join(' & ') + '</p>' +
+  '<p>' + song.title + '</p>' +
+  '</div>';
   return html;
 };
 

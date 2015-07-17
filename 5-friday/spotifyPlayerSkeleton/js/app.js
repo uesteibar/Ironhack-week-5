@@ -21,7 +21,7 @@
       });
     });
 
-    resultsContainer.on('click', 'a[data-index]', function(event) {
+    resultsContainer.on('click', '[data-index]', function(event) {
       event.preventDefault();
       var index = event.currentTarget.dataset.index;
       widget.update(currentSongs[index]);
