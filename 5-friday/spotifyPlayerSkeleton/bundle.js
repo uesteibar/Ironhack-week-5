@@ -1,5 +1,4 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-
 (function() {
   var retriever = require('./spotify/spotify-retriever');
   var SongListComponent = require('./spotify/components/song-list');
@@ -9,7 +8,8 @@
   $(document).ready(function() {
     var resultsContainer = $('div#search-results');
     var searchForm = $('form#search');
-    var widget = new WidgetComponent($('div#widget'));
+    var widgetElement = $('div#widget');
+    var widget = new WidgetComponent('div#widget');
     var currentSongs = [];
 
     searchForm.on('submit', function(event) {
@@ -26,6 +26,16 @@
       event.preventDefault();
       var index = event.currentTarget.dataset.index;
       widget.update(currentSongs[index]);
+      widget.play();
+    });
+
+    widgetElement.on('click', '.btn-play', function(event) {
+      event.preventDefault();
+      if (widget.playing) {
+        widget.pause();
+      } else {
+        widget.play();
+      }
     });
   });
 })();
@@ -65,13 +75,32 @@ module.exports = SongListComponent;
 
 var WidgetComponent = function(selector) {
   this.selector = selector;
+  this.playing = false;
 };
 
 WidgetComponent.prototype.update = function (song) {
-  $('#widget #title').text(song.title);
-  $('#widget #author').text(song.authors.join(' & '));
-  $('#widget audio').attr('src', song.previewUrl);
-  $('#widget .cover img').attr('src', song.imageUrl);
+  this.pause();
+  $(this.selector + ' #title').text(song.title);
+  $(this.selector + ' #author').text(song.authors.join(' & '));
+  $(this.selector + ' audio').attr('src', song.previewUrl);
+  $(this.selector + ' .cover img').attr('src', song.imageUrl);
+  $(this.selector + ' .seekbar progress').attr('value', 0);
+
+  $(this.selector + ' .btn-play').toggleClass('disabled', false);
+};
+
+WidgetComponent.prototype.play = function () {
+  $(this.selector + ' audio').trigger('play');
+  $(this.selector + ' .btn-play').toggleClass('playing', true);
+
+  this.playing = true;
+};
+
+WidgetComponent.prototype.pause = function () {
+  $(this.selector + ' audio').trigger('pause');
+  $(this.selector + ' .btn-play').toggleClass('playing', false);
+
+  this.playing = false;
 };
 
 module.exports = WidgetComponent;

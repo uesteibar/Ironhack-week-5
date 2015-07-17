@@ -1,4 +1,3 @@
-
 (function() {
   var retriever = require('./spotify/spotify-retriever');
   var SongListComponent = require('./spotify/components/song-list');
@@ -8,7 +7,8 @@
   $(document).ready(function() {
     var resultsContainer = $('div#search-results');
     var searchForm = $('form#search');
-    var widget = new WidgetComponent($('div#widget'));
+    var widgetElement = $('div#widget');
+    var widget = new WidgetComponent('div#widget');
     var currentSongs = [];
 
     searchForm.on('submit', function(event) {
@@ -25,6 +25,16 @@
       event.preventDefault();
       var index = event.currentTarget.dataset.index;
       widget.update(currentSongs[index]);
+      widget.play();
+    });
+
+    widgetElement.on('click', '.btn-play', function(event) {
+      event.preventDefault();
+      if (widget.playing) {
+        widget.pause();
+      } else {
+        widget.play();
+      }
     });
   });
 })();
