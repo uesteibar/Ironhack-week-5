@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Spotify</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+	<div class="block" id="widget">
+		<div class="header">
+			<!-- Try adding/removing these classes: -->
+			<!-- disabled -->
+			<!-- playing -->
+			<div class="btn-play disabled"></div>
+
+			<div class="metadata">
+				<p class="title" id="title"></p>
+				<p class="author" id="author"></p>
+
+				<div class="seekbar">
+					<progress value="5" max="30"></progress>
+				</div>
+			</div>
+		</div>
+		<div class="cover">
+			<img src="https://i.scdn.co/image/04da6dfc1f5f45fdeba938a0cc71cf372524fd43">
+		</div>
+
+		<audio src="https://p.scdn.co/mp3-preview/8e9c5ffdc38e91659bfe8b6bd44650dfc25a3d31"></audio>
+	</div>
+
+	<div class="block search">
+		<form id="search">
+			<div>
+				<input type="text" name="term" placeholder="type something..." value="">
+			</div>
+			<div>
+				<input type="submit" name="submit" value="Submit">
+			</div>
+		</form>
+
+		<div id="search-results">
+
+		</div>
+	</div>
+
+	<script src="jquery-1.11.3.min.js"></script>
+	<script src="bundle.js" charset="utf-8"></script>
+
+</body>
+
+</html>
