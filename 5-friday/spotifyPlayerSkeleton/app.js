@@ -8,7 +8,7 @@
     var resultsContainer = $('div#search-results');
     var searchForm = $('form#search');
     var widgetElement = $('div#widget');
-    var widget = new WidgetComponent('div#widget');
+    var widget = new WidgetComponent('div#widget', {loop: true, autoplay: true});
     var currentSongs = [];
 
     searchForm.on('submit', function(event) {
@@ -25,7 +25,6 @@
       event.preventDefault();
       var index = event.currentTarget.dataset.index;
       widget.update(currentSongs[index]);
-      widget.play();
     });
 
     widgetElement.on('click', '.btn-play', function(event) {

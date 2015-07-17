@@ -8,7 +8,6 @@ SpotifyRetriever.prototype.search = function(term, callback) {
   var request = $.get(this.baseUrl + '/search?type=track&q=' + term);
 
   request.done(function(result) {
-    console.log(result);
     var songs = result.tracks.items.map(function(track) {
       return new Song({
         title: track.name,
